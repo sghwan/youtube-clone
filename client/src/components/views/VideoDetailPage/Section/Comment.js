@@ -1,8 +1,11 @@
 import Axios from 'axios'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Button, Input } from 'antd'
 import SingleComment from './SingleComment'
 import ReplyComment from './ReplyComment'
+
+const { TextArea } = Input;
 
 function Comment(props) {
 
@@ -49,7 +52,7 @@ function Comment(props) {
                 (!comment.responseTo &&
                     <React.Fragment>
                         <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={videoId} />
-                        <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._id} postId={videoId} commentLists={props.commentLists}/>
+                        <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._id} postId={videoId} commentLists={props.commentLists} />
                     </React.Fragment>
                 )
             ))}
@@ -57,14 +60,14 @@ function Comment(props) {
             {/* Root Comment Form */}
 
             <form style={{ display: 'flex' }} onSubmit={onSubmit}>
-                <textarea
+                <TextArea
                     style={{ width: '100%', borderRadius: '5px' }}
                     onChange={handleClick}
                     value={commentValue}
                     placeholder="코멘트를 작성해 주세요"
                 />
                 <br />
-                <button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</button>
+                <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
             </form>
         </div>
     )

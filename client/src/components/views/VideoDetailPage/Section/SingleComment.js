@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Comment, Avatar, Button, Input } from 'antd'
 import { useSelector } from 'react-redux'
+import LikeDislikes from './LikeDislikes'
 import Axios from 'axios'
 
 const { TextArea } = Input;
@@ -46,7 +47,8 @@ function SingleComment(props) {
 
 
     const actions = [
-        <span onClick={onClikcReplyOpen} key='comment-basic-reply-to'>Reply to</span>
+        <LikeDislikes userId={localStorage.getItem('userId')} commentId={props.comment._id}/>
+        ,<span onClick={onClikcReplyOpen} key='comment-basic-reply-to'>Reply to</span>
     ]
 
     return (
@@ -60,14 +62,14 @@ function SingleComment(props) {
 
             {OpenReply &&
                 <form style={{ display: 'flex' }} onSubmit={onSubmit}>
-                    <textarea
+                    <TextArea
                         style={{ width: '100%', borderRadius: '5px' }}
                         onChange={onHandleChange}
                         value={CommentValue}
                         placeholder="코멘트를 작성해 주세요"
                     />
                     <br />
-                    <button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</button>
+                    <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
                 </form>
             }
 
