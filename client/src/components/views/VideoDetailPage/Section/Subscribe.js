@@ -8,7 +8,7 @@ function Subscribe(props) {
 
     useEffect(() => {
 
-        let variable = { userTo: props.userTo }
+        let variable = { userTo: props.userTo, videoId: props.videoId }
 
         Axios.post('/api/subscribe/subscribeNumber', variable)
             .then(response => {
@@ -19,7 +19,12 @@ function Subscribe(props) {
                 }
             })
 
-        let subscribeVariable = { userTo: props.userTo, userFrom: localStorage.getItem('userId') }
+        let subscribeVariable =
+        {
+            userTo: props.userTo,
+            userFrom: localStorage.getItem('userId'),
+            videoId: props.videoId
+        }
 
         Axios.post('/api/subscribe/subscribed', subscribeVariable)
             .then(resposne => {
@@ -36,14 +41,15 @@ function Subscribe(props) {
 
         let subscribeVariable = {
             userTo: props.userTo,
-            userFrom: props.userFrom
+            userFrom: props.userFrom,
+            videoId: props.videoId
         }
 
-        if(Subscribed) {
+        if (Subscribed) {
 
             Axios.post('/api/subscribe/unSubscribe', subscribeVariable)
                 .then(response => {
-                    if(response.data.success) {
+                    if (response.data.success) {
                         setSubscribeNumber(SubscribeNumber - 1)
                         setSubscribed(!Subscribed)
                     } else {
@@ -55,7 +61,7 @@ function Subscribe(props) {
 
             Axios.post('/api/subscribe/subscribe', subscribeVariable)
                 .then(response => {
-                    if(response.data.success) {
+                    if (response.data.success) {
                         setSubscribeNumber(SubscribeNumber + 1)
                         setSubscribed(!Subscribed)
                     } else {

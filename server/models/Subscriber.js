@@ -10,6 +10,10 @@ const subscriberSchema = mongoose.Schema({
     userFrom: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    videoId : {
+        type: Schema.Types.ObjectId,
+        ref: 'Video'
     }
 
 }, { timestamps: true })
